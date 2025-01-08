@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>WebAsteroid</title>
+    <style>
+      /* Reset default margins and paddings for all elements */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Set the entire page's background to black and use Flexbox for layout */
+      html, body {
+        width: 100%;
+        height: 100%;
+        background-color: #000000; /* Black background */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center;     /* Center vertically */
+        overflow: hidden;
+      }
+
+      /* Container to hold the title and game along with side texts */
+      #container {
+        display: flex;
+        flex-direction: column; /* Stack title above the game and side texts */
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 20px; /* Optional padding around the container */
+      }
+
+      /* Title styling */
+      #title {
+        color: white; /* White text color */
+        font-family: Arial, sans-serif;
+        font-size: 48px; /* Large font size for prominence */
+        margin-bottom: 20px; /* Space between title and main content */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional text shadow for depth */
+      }
+
+      /* Main content area: side texts and game */
+      #main-content {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        max-width: 1400px; /* Optional max width for better readability */
+      }
+
+      /* Left-side description div */
+      #description {
+        width: 300px; /* Adjust as needed */
+        color: white; /* Text color */
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        padding: 20px;
+        margin-right: 20px; /* Space between description and game */
+        overflow-y: auto; /* Scroll if content overflows */
+      }
+
+      /* Right-side instructions div */
+      #instructions {
+        width: 300px; /* Adjust as needed */
+        color: white; /* Text color */
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        padding: 20px;
+        margin-left: 20px; /* Space between game and instructions */
+        overflow-y: auto; /* Scroll if content overflows */
+      }
+
+      /* Game area styling */
+      #game {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Canvas styling with white border */
+      canvas {
+        border: 5px solid white; /* White border */
+        background-color: #000000; /* Ensure canvas background is black */
+        display: block;
+        width: 1000px;
+        height: 1000px;
+      }
+
+      /* HUD styling */
+      #hud {
+        position: absolute;    /* So it can overlay the canvas */
+        top: 10px;            /* Distance from the top */
+        left: 10px;           /* Distance from the left */
+        color: white;         /* Text color */
+        font-family: Arial, sans-serif;
+        font-size: 24px;      /* Text size */
+        z-index: 9999;        /* Ensure it's above the canvas */
+        pointer-events: none; /* Allow clicks to pass through if needed */
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1600px) {
+        #description, #instructions {
+          width: 250px;
+          font-size: 16px;
+        }
+
+        canvas {
+          width: 800px;
+          height: 800px;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        #description, #instructions {
+          width: 200px;
+          font-size: 14px;
+        }
+
+        canvas {
+          width: 600px;
+          height: 600px;
+        }
+      }
+
+      @media (max-width: 800px) {
+        #main-content {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        #description, #instructions {
+          width: 90%;
+          margin: 10px 0;
+          text-align: center;
+        }
+
+        canvas {
+          width: 90%;
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Title -->
+      <div id="title">WebAsteroid</div>
+
+      <!-- Main Content Area -->
+      <div id="main-content">
+        <!-- Left-side description -->
+        <div id="description">
+          <h2>About the Project</h2>
+          <p>
+           WebAsteroid is entirely written in C! It utilizes Emscripten to compile the code into a WebAssembly (Wasm) program. The game leverages OpenGL ES 2.0, enabling GPU-accelerated graphics through WebGL. Additionally, WebAsteroid can be effortlessly transformed into a standalone mobile application if desired.
+
+          </p>
+        </div>
+
+        <!-- Game area -->
+        <div id="game">
+          <!-- HUD overlay -->
+          <div id="hud">Score: 0 | Lives: 3</div>
+          <!-- The main game canvas -->
+          <canvas id="canvas" width="1000" height="1000" oncontextmenu="event.preventDefault()"></canvas>
+        </div>
+
+        <!-- Right-side instructions -->
+        <div id="instructions">
+          <h2>Instructions</h2>
+          <ul>
+            <li><strong>Move:</strong> Use W to go forward and AD to steer the spaceship.</li>
+            <li><strong>Shoot:</strong> Press the spacebar to fire bullets at asteroids.</li>
+            <li><strong>Objective:</strong> Destroy as many asteroids as possible without losing all lives.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Module Configuration -->
+    <script type='text/javascript'>
+      var Module = {
+        canvas: (function() {
+          return document.getElementById('canvas');
+        })(),
+        locateFile: function(path, prefix) {
+          if (path.endsWith('.data')) {
+            return 'asteroid.data';
+          }
+          return prefix + path;
+        },
+        print: function(text) {
+          // Optional: Redirect or handle standard output if needed
+        },
+        printErr: function(text) {
+          // Optional: Handle error messages
+          console.error(text);
+        }
+      };
+    </script>
+
+    <!-- Load Your Emscripten-Generated JS -->
+    <script src="game_page/asteroid.js"></script>
+  </body>
+</html>
+
