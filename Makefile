@@ -4,7 +4,7 @@ CFLAGS := -Wall -Wextra -O3 -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=2  -s SAFE_HE
 
 # Directories
 SRC_DIR := source
-BUILD_DIR := build
+BUILD_DIR := docs
 INC_DIR := include
 
 # Source Files

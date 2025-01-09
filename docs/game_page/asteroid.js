@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {}
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpio5bptca.js
+// include: /tmp/tmphek_q3b6.js
 Module["expectedDataFileDownloads"] ??= 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -50,7 +50,7 @@ Module["expectedDataFileDownloads"]++;
       // web worker
       PACKAGE_PATH = encodeURIComponent(location.pathname.substring(0, location.pathname.lastIndexOf("/")) + "/");
     }
-    var PACKAGE_NAME = "build/game_page/asteroid.data";
+    var PACKAGE_NAME = "docs/game_page/asteroid.data";
     var REMOTE_PACKAGE_BASE = "asteroid.data";
     var REMOTE_PACKAGE_NAME = Module["locateFile"] ? Module["locateFile"](REMOTE_PACKAGE_BASE, "") : REMOTE_PACKAGE_BASE;
     var REMOTE_PACKAGE_SIZE = metadata["remote_package_size"];
@@ -173,9 +173,9 @@ Module["expectedDataFileDownloads"]++;
         for (var i = 0; i < files.length; ++i) {
           DataRequest.prototype.requests[files[i].filename].onload();
         }
-        Module["removeRunDependency"]("datafile_build/game_page/asteroid.data");
+        Module["removeRunDependency"]("datafile_docs/game_page/asteroid.data");
       }
-      Module["addRunDependency"]("datafile_build/game_page/asteroid.data");
+      Module["addRunDependency"]("datafile_docs/game_page/asteroid.data");
       Module["preloadResults"] ??= {};
       Module["preloadResults"][PACKAGE_NAME] = {
         fromCache: false
@@ -215,32 +215,28 @@ Module["expectedDataFileDownloads"]++;
       "filename": "/misc/ship.png",
       "start": 177674,
       "end": 196610
-    }, {
-      "filename": "/misc/tp2.ml",
-      "start": 196610,
-      "end": 208940
     } ],
-    "remote_package_size": 208940
+    "remote_package_size": 196610
   });
 })();
 
-// end include: /tmp/tmpio5bptca.js
-// include: /tmp/tmp9hb3zmvx.js
+// end include: /tmp/tmphek_q3b6.js
+// include: /tmp/tmpn3o11ehh.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if (Module["$ww"] || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: /tmp/tmp9hb3zmvx.js
-// include: /tmp/tmpa9ym3t67.js
+// end include: /tmp/tmpn3o11ehh.js
+// include: /tmp/tmp1l3u8n3i.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: /tmp/tmpa9ym3t67.js
+// end include: /tmp/tmp1l3u8n3i.js
 // Sometimes an existing Module object exists with properties
 // meant to overwrite the default module functionality. Here
 // we collect those properties and reapply _after_ we configure
